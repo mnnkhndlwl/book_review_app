@@ -29,13 +29,13 @@ app.get("/books", (req, res) => {
 
 // to add new book
 app.post("/books", (req, res) => {
-  const q = "INSERT INTO books(`title`,`desc`,`price`,`cover`) VALUES(?)";
+  const q = "INSERT INTO books(`title`,`desc`,`cover`,`price`) VALUES(?)";
 
   const values = [
     req.body.title,
     req.body.desc,
-    req.body.price,
     req.body.cover,
+    req.body.price,
   ];
 
   db.query(q, [values], (err, data) => {
@@ -56,7 +56,7 @@ app.delete("/books/:id", (req, res) => {
 });
 
 // update a particular book
-app.delete("/books/:id", (req, res) => {
+app.put("/books/:id", (req, res) => {
     const bookId = req.params.id;
     const q = "UPDATE books SET `title`= ?, `desc`= ?, `price`= ?, `cover`= ? WHERE id = ?";
 
